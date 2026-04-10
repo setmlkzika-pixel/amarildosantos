@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<!--
+  =====================================================================
+  SITE: Nunes Santos Advocacia
+  PARCEIRO DE: Amarildo Santos Advogados
+  FOCO: Previdenciário · Trabalhista · Família · Cível · Inventário
+  VERSÃO: 1.0
+
+  CONTATOS:
+  - WhatsApp: (27) 99664-3510 → wa.me/5527996643510
+  - Instagram: @nunessantos.advocacia
+
+  COMO VOLTAR PARA AMARILDO SANTOS:
+  - Link no menu e no rodapé aponta para "index.html" ou "amarildo-santos.html"
+  =====================================================================
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <!-- Anti-cache: força o navegador a sempre carregar a versão mais recente -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nunes Santos Advocacia — Previdenciário INSS e RPPS, Servidor Público, Trabalhista, Família, Cível e Inventário. Vitória, ES.">
+  <title>Nunes Santos Advocacia — Vitória, ES</title>
+  <meta property="og:image" content="https://nunessantosadvocacia.com.br/og-image.jpg">
+  <meta property="og:url" content="https://nunessantosadvocacia.com.br">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Nunes Santos Advocacia">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Crimson+Pro:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+
+    /* ================================================================
+       VARIÁVEIS — Paleta Nunes Santos
+       Inspirada na logo: azul marinho profundo + dourado quente
+       ================================================================ */
+    :root {
+      --ns-azul:        #0d1b35;   /* azul marinho da logo */
+      --ns-azul-medio:  #162744;   /* tom intermediário */
+      --ns-azul-claro:  #1e3560;   /* detalhes */
+      --ns-dourado:     #c9a84c;   /* dourado da logo */
+      --ns-dourado-clr: #e0c070;   /* dourado mais claro */
+      --ns-creme:       #f4f0e6;   /* fundo seções claras */
+      --ns-creme-esc:   #ece6d4;   /* fundo alternado */
+      --ns-texto:       #1a1a1a;
+      --ns-suave:       #6a6a6a;
+      --ns-branco:      #ffffff;
+      --ns-wa:          #25d366;
+      --ns-wa-hover:    #1ebe5a;
+      --fonte-titulo:   'Playfair Display', Georgia, serif;
+      --fonte-corpo:    'Crimson Pro', Georgia, serif;
+      --fonte-ui:       'DM Sans', system-ui, sans-serif;
+      --pad:            100px 80px;
+    }
+
+    /* ================================================================ RESET ================================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--fonte-ui); color: var(--ns-texto); background: var(--ns-creme); overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .entrar { opacity: 0; transform: translateY(20px); transition: opacity .5s ease, transform .5s ease; }
+    .entrar.vis { opacity: 1; transform: translateY(0); }
+
+    /* Helpers */
+    .rotulo { display: inline-flex; align-items: center; gap: 12px; color: var(--ns-dourado); font-size: 10px; font-weight: 500; letter-spacing: .28em; text-transform: uppercase; margin-bottom: 14px; }
+    .rotulo::before { content: ''; width: 26px; height: 1px; background: var(--ns-dourado); }
+    .titulo { font-family: var(--fonte-titulo); font-size: clamp(28px, 3vw, 44px); font-weight: 500; line-height: 1.15; color: var(--ns-azul); margin-bottom: 14px; }
+    .titulo--claro { color: var(--ns-branco); }
+    .intro { font-family: var(--fonte-corpo); font-size: 19px; font-weight: 300; color: var(--ns-suave); line-height: 1.7; max-width: 560px; }
+    .intro--claro { color: rgba(255,255,255,.52); }
+
+
+    /* ================================================================
+       BARRA DE RETORNO — topo da página
+       Leva de volta para o Amarildo Santos Advogados
+       ================================================================ */
+    .barra-retorno {
+      background: var(--ns-azul);
+      border-bottom: 1px solid rgba(201,168,76,.2);
+      padding: 8px 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .barra-retorno__texto {
+      font-size: 12px;
+      color: rgba(255,255,255,.42);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .barra-retorno__texto span { color: rgba(201,168,76,.7); font-weight: 500; }
+    .barra-retorno__btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(201,168,76,.1);
+      border: 1px solid rgba(201,168,76,.3);
+      color: var(--ns-dourado); padding: 6px 18px;
+      border-radius: 20px; font-size: 11px; font-weight: 500;
+      letter-spacing: .06em; transition: all .2s;
+    }
+    .barra-retorno__btn:hover { background: var(--ns-dourado); color: var(--ns-azul); }
+
+
+    /* ================================================================ NAVEGAÇÃO ================================================================ */
+    .nav {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(13,27,53,.98); backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(201,168,76,.15);
+      height: 70px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 80px; transition: box-shadow .3s;
+    }
+    .nav--sombra { box-shadow: 0 4px 40px rgba(0,0,0,.45); }
+    .nav__logo { display: flex; align-items: center; gap: 12px; }
+    .nav__logo img { height: 42px; width: auto; }
+    .nav__logo-texto { font-family: var(--fonte-titulo); color: var(--ns-dourado); font-size: 16px; font-weight: 600; line-height: 1.2; }
+    .nav__logo-sub { display: block; font-family: var(--fonte-ui); font-size: 9px; color: rgba(201,168,76,.4); letter-spacing: .18em; text-transform: uppercase; font-weight: 300; margin-top: 1px; }
+    .nav__links { display: flex; gap: 26px; list-style: none; }
+    .nav__links a { color: rgba(255,255,255,.58); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; transition: color .2s; position: relative; padding-bottom: 2px; }
+    .nav__links a::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 1px; background: var(--ns-dourado); transform: scaleX(0); transition: transform .2s; }
+    .nav__links a:hover, .nav__links a.ativo { color: var(--ns-dourado); }
+    .nav__links a:hover::after, .nav__links a.ativo::after { transform: scaleX(1); }
+    .nav__wa {
+      display: flex; align-items: center; gap: 7px;
+      background: var(--ns-wa); color: #fff;
+      padding: 9px 20px; border-radius: 40px;
+      font-size: 11px; font-weight: 500;
+      transition: all .2s;
+    }
+    .nav__wa:hover { background: var(--ns-wa-hover); transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; }
+    .hamburger span { width: 24px; height: 2px; background: var(--ns-dourado); border-radius: 2px; transition: all .3s; }
+    .hamburger.aberto span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.aberto span:nth-child(2) { opacity: 0; }
+    .hamburger.aberto span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mob-menu {
+      display: none; position: fixed; top: 70px; left: 0; right: 0; z-index: 190;
+      background: rgba(13,27,53,.98); backdrop-filter: blur(16px);
+      padding: 18px 26px; border-bottom: 1px solid rgba(201,168,76,.12);
+      flex-direction: column; gap: 4px;
+    }
+    .mob-menu.aberto { display: flex; }
+    .mob-menu a { color: rgba(255,255,255,.68); font-size: 13px; letter-spacing: .1em; text-transform: uppercase; padding: 11px 0; border-bottom: 1px solid rgba(201,168,76,.08); transition: color .2s; }
+    .mob-menu a:hover { color: var(--ns-dourado); }
+    .mob-menu__wa { background: var(--ns-wa); color: #fff !important; border-radius: 40px; padding: 13px 24px !important; text-align: center; border: none !important; margin-top: 10px; }
+    .mob-menu__voltar { background: rgba(201,168,76,.1); color: var(--ns-dourado) !important; border-radius: 40px; border: 1px solid rgba(201,168,76,.3) !important; padding: 11px 24px !important; text-align: center; margin-top: 6px; }
+
+
+    /* ================================================================ HERO ================================================================ */
+    .hero {
+      min-height: calc(100vh - 70px);
+      background: var(--ns-azul);
+      display: grid; grid-template-columns: 55% 45%;
+      overflow: hidden;
+    }
+    .hero__left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 80px 60px 80px 80px; position: relative; z-index: 2;
+    }
+    .hero__badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      border: 1px solid rgba(201,168,76,.3); color: var(--ns-dourado);
+      padding: 6px 16px; font-size: 10px; letter-spacing: .25em;
+      text-transform: uppercase; border-radius: 2px; margin-bottom: 32px; width: fit-content;
+    }
+    .hero__badge::before { content: ''; width: 18px; height: 1px; background: var(--ns-dourado); }
+    .hero h1 {
+      font-family: var(--fonte-titulo);
+      font-size: clamp(34px, 3.8vw, 56px);
+      font-weight: 500; color: var(--ns-branco); line-height: 1.1; margin-bottom: 22px;
+    }
+    .hero h1 em { font-style: normal; color: var(--ns-dourado); display: block; }
+    .hero__desc {
+      font-family: var(--fonte-corpo); font-size: 19px; font-weight: 300;
+      color: rgba(255,255,255,.52); line-height: 1.7; max-width: 460px; margin-bottom: 42px;
+    }
+    .hero__logo-grande {
+      width: 160px; height: auto; margin-bottom: 32px;
+      filter: drop-shadow(0 8px 32px rgba(201,168,76,.2));
+    }
+    .hero__btns { display: flex; flex-direction: column; gap: 12px; }
+    .hero__btn-wa {
+      display: inline-flex; align-items: center; gap: 13px;
+      background: var(--ns-wa); color: #fff;
+      padding: 17px 34px; border-radius: 50px; width: fit-content;
+      font-size: 14px; font-weight: 500;
+      transition: all .25s; box-shadow: 0 8px 28px rgba(37,211,102,.25);
+    }
+    .hero__btn-wa:hover { background: var(--ns-wa-hover); transform: translateY(-2px); }
+    .hero__btn-wa .ico { font-size: 22px; }
+    .hero__btn-wa .txt { display: flex; flex-direction: column; line-height: 1.2; }
+    .hero__btn-wa .txt small { font-size: 10px; opacity: .7; font-weight: 300; }
+    .hero__btn-wa .txt strong { font-size: 14px; font-weight: 600; }
+    .hero__alt { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding-left: 4px; }
+    .hero__alt span { font-size: 11px; color: rgba(255,255,255,.28); }
+    .hero__alt a { color: rgba(255,255,255,.45); font-size: 11px; transition: color .2s; }
+    .hero__alt a:hover { color: var(--ns-dourado); }
+    .hero__right {
+      position: relative; overflow: hidden;
+      background: var(--ns-azul-medio);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero__right::before {
+      content: '';
+      position: absolute; inset: 0; opacity: .05;
+      background: repeating-linear-gradient(-45deg,transparent,transparent 46px,rgba(201,168,76,1) 46px,rgba(201,168,76,1) 47px);
+    }
+    .hero__right::after {
+      content: '';
+      position: absolute; top: 0; left: 0; bottom: 0; width: 100px; z-index: 3;
+      background: linear-gradient(to right, var(--ns-azul), transparent);
+    }
+    .hero__visual {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 40px;
+      text-align: center;
+    }
+    .hero__pilares-logo {
+      width: 200px; height: auto;
+      opacity: .15; filter: invert(1);
+    }
+    .hero__servicos-lista { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 240px; }
+    .hero__serv {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 16px;
+      border: 1px solid rgba(201,168,76,.15); border-radius: 4px;
+      background: rgba(201,168,76,.04);
+    }
+    .hero__serv-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ns-dourado); flex-shrink: 0; }
+    .hero__serv span { font-size: 12px; color: rgba(255,255,255,.6); }
+
+
+    /* ================================================================ SOBRE ================================================================ */
+    .sobre { background: var(--ns-branco); padding: var(--pad); }
+    .sobre__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; margin-top: 56px; }
+    .sobre__visual { display: flex; flex-direction: column; gap: 14px; }
+    .sobre__card-escuro {
+      background: var(--ns-azul); border-radius: 8px; padding: 40px 36px;
+      position: relative; overflow: hidden; min-height: 240px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .sobre__card-escuro::before {
+      content: 'NS'; position: absolute; bottom: -24px; right: 0px;
+      font-family: var(--fonte-titulo); font-size: 140px; color: rgba(201,168,76,.06);
+      line-height: 1; font-weight: 700;
+    }
+    .sobre__citacao {
+      font-family: var(--fonte-titulo); font-style: italic;
+      font-size: 20px; line-height: 1.45; color: var(--ns-dourado-clr); position: relative; z-index: 1;
+    }
+    .sobre__citacao::before { content: '"'; font-size: 50px; color: rgba(201,168,76,.18); display: block; line-height: .6; margin-bottom: 10px; }
+    .sobre__sig { position: relative; z-index: 1; margin-top: 20px; }
+    .sobre__sig strong { display: block; color: var(--ns-branco); font-size: 14px; font-weight: 500; }
+    .sobre__sig span { font-size: 10px; color: rgba(201,168,76,.5); letter-spacing: .12em; text-transform: uppercase; margin-top: 3px; display: block; }
+    .sobre__card-dourado {
+      background: var(--ns-dourado); border-radius: 8px; padding: 24px 28px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+    }
+    .sobre__stat strong { font-family: var(--fonte-titulo); font-size: 32px; font-weight: 700; color: var(--ns-azul); display: block; line-height: 1; }
+    .sobre__stat span { font-size: 11px; color: rgba(13,27,53,.65); line-height: 1.4; margin-top: 3px; display: block; }
+    .sobre__texto p { font-family: var(--fonte-corpo); font-size: 18px; line-height: 1.75; color: var(--ns-suave); margin-bottom: 16px; }
+    .sobre__pilares { display: flex; flex-direction: column; gap: 10px; margin-top: 26px; }
+    .sobre__pilar {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 14px 18px; background: var(--ns-creme);
+      border-left: 3px solid var(--ns-dourado); border-radius: 0 6px 6px 0;
+    }
+    .sobre__pilar-ico { font-size: 18px; flex-shrink: 0; }
+    .sobre__pilar strong { display: block; font-size: 13px; font-weight: 500; color: var(--ns-azul); margin-bottom: 2px; }
+    .sobre__pilar span { font-size: 12px; color: var(--ns-suave); line-height: 1.5; }
+
+
+    /* ================================================================ ÁREAS ================================================================ */
+    .areas { background: var(--ns-creme); padding: var(--pad); }
+    .areas__header { margin-bottom: 52px; }
+    .areas__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .areas__card {
+      background: var(--ns-branco); border: 1px solid rgba(0,0,0,.07);
+      border-radius: 10px; padding: 36px 28px;
+      position: relative; overflow: hidden; transition: all .3s;
+    }
+    .areas__card::after {
+      content: attr(data-n); position: absolute; bottom: -12px; right: 14px;
+      font-family: var(--fonte-titulo); font-size: 86px; font-weight: 700;
+      color: rgba(201,168,76,.07); line-height: 1; transition: color .3s;
+    }
+    .areas__card:hover { border-color: var(--ns-dourado); transform: translateY(-4px); box-shadow: 0 18px 54px rgba(13,27,53,.1); }
+    .areas__card:hover::after { color: rgba(201,168,76,.14); }
+    .areas__ico {
+      width: 48px; height: 48px; background: var(--ns-azul); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 20px;
+    }
+    .areas__card h3 { font-family: var(--fonte-titulo); font-size: 19px; font-weight: 500; color: var(--ns-azul); margin-bottom: 10px; }
+    .areas__card p { font-size: 13.5px; line-height: 1.65; color: var(--ns-suave); }
+    .areas__wa { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; color: var(--ns-wa-hover); font-size: 12px; font-weight: 500; transition: opacity .2s; }
+    .areas__wa:hover { opacity: .75; }
+
+
+    /* ================================================================ CONTATO ================================================================ */
+    .contato { background: var(--ns-azul); padding: var(--pad); }
+    .contato__inner {
+      display: grid; grid-template-columns: 1fr auto; gap: 72px; align-items: center;
+      border: 1px solid rgba(201,168,76,.18); border-radius: 12px;
+      padding: 60px 68px; position: relative; overflow: hidden;
+    }
+    .contato__inner::before {
+      content: ''; position: absolute; top: 0; right: 0; width: 40%; height: 100%;
+      background: linear-gradient(to left, rgba(201,168,76,.03), transparent);
+      pointer-events: none;
+    }
+    .contato__info { position: relative; z-index: 1; }
+    .contato__info .rotulo { color: rgba(201,168,76,.5); }
+    .contato__info .rotulo::before { background: var(--ns-dourado); }
+    .contato__desc { font-family: var(--fonte-corpo); font-size: 18px; color: rgba(255,255,255,.48); line-height: 1.7; max-width: 480px; margin-bottom: 36px; }
+    .contato__lista { display: flex; flex-direction: column; gap: 16px; }
+    .contato__item { display: flex; align-items: flex-start; gap: 13px; }
+    .contato__item-ico {
+      width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+      border: 1px solid rgba(201,168,76,.25); background: rgba(201,168,76,.05);
+      display: flex; align-items: center; justify-content: center; font-size: 14px;
+    }
+    .contato__item-rot { display: block; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ns-dourado); margin-bottom: 2px; font-weight: 500; }
+    .contato__item a, .contato__item p { color: rgba(255,255,255,.68); font-size: 13.5px; transition: color .2s; line-height: 1.5; }
+    .contato__item a:hover { color: var(--ns-dourado); }
+    .card-wa {
+      background: rgba(37,211,102,.06); border: 2px solid rgba(37,211,102,.38);
+      border-radius: 16px; padding: 42px 34px; text-align: center;
+      min-width: 240px; flex-shrink: 0; position: relative; z-index: 1;
+    }
+    .card-wa__badge {
+      display: inline-block; background: rgba(37,211,102,.14); color: var(--ns-wa);
+      font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+      padding: 4px 14px; border-radius: 20px; margin-bottom: 18px;
+    }
+    .card-wa__ico { font-size: 52px; display: block; margin-bottom: 14px; }
+    .card-wa__rot { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.32); margin-bottom: 7px; display: block; }
+    .card-wa__num { font-family: var(--fonte-titulo); font-size: 22px; color: var(--ns-branco); display: block; margin-bottom: 5px; font-weight: 500; }
+    .card-wa__hora { font-size: 11px; color: rgba(255,255,255,.22); margin-bottom: 26px; display: block; }
+    .card-wa__btn {
+      display: block; background: var(--ns-wa); color: #fff;
+      padding: 15px 24px; border-radius: 50px; font-size: 13.5px; font-weight: 600;
+      transition: all .2s;
+    }
+    .card-wa__btn:hover { background: var(--ns-wa-hover); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(37,211,102,.32); }
+    .card-wa__nota { font-size: 11px; color: rgba(255,255,255,.18); margin-top: 11px; display: block; }
+
+
+    /* ================================================================ BANNER PARCEIRO ================================================================ */
+    .banner-parceiro {
+      background: var(--ns-creme-esc); padding: 68px 80px;
+    }
+    .banner-parceiro__inner {
+      background: var(--ns-branco); border-radius: 12px; padding: 48px 56px;
+      display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center;
+      border: 1px solid rgba(0,0,0,.07);
+      box-shadow: 0 8px 40px rgba(13,27,53,.08);
+    }
+    .banner-parceiro__tag { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--ns-dourado); margin-bottom: 10px; display: block; font-weight: 500; }
+    .banner-parceiro__inner h2 { font-family: var(--fonte-titulo); font-size: 28px; font-weight: 500; color: var(--ns-azul); margin-bottom: 12px; }
+    .banner-parceiro__inner p { font-family: var(--fonte-corpo); font-size: 17px; color: var(--ns-suave); line-height: 1.7; max-width: 480px; }
+    .banner-parceiro__card {
+      background: var(--ns-azul); border-radius: 14px; padding: 36px 30px;
+      text-align: center; min-width: 220px; flex-shrink: 0;
+    }
+    .banner-parceiro__logo { width: 100px; height: auto; margin: 0 auto 16px; border-radius: 6px; }
+    .banner-parceiro__nome { font-family: var(--fonte-titulo); font-size: 16px; color: var(--ns-dourado); display: block; margin-bottom: 4px; }
+    .banner-parceiro__sub { font-size: 11px; color: rgba(255,255,255,.28); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 22px; display: block; }
+    .banner-parceiro__btn {
+      display: block; background: var(--ns-dourado); color: var(--ns-azul);
+      padding: 13px 22px; border-radius: 40px; font-size: 13px; font-weight: 600; transition: all .2s;
+    }
+    .banner-parceiro__btn:hover { background: var(--ns-dourado-clr); }
+
+
+    /* ================================================================ DEPOIMENTOS ================================================================ */
+    .deps { background: var(--ns-branco); padding: var(--pad); }
+    .deps__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 50px; }
+    .deps__card {
+      background: var(--ns-creme); border-radius: 8px; padding: 28px 24px;
+      position: relative; border: 1px solid transparent; transition: border-color .3s;
+    }
+    .deps__card:hover { border-color: rgba(201,168,76,.35); }
+    .deps__card::before {
+      content: '"'; font-family: var(--fonte-titulo); font-size: 72px;
+      color: var(--ns-dourado); opacity: .22;
+      position: absolute; top: 4px; left: 20px; line-height: 1;
+    }
+    .deps__stars { color: var(--ns-dourado); font-size: 13px; margin-top: 26px; margin-bottom: 4px; }
+    .deps__card p { font-family: var(--fonte-corpo); font-size: 16px; line-height: 1.7; color: var(--ns-suave); margin-bottom: 18px; }
+    .deps__autor strong { display: block; font-size: 13px; font-weight: 500; color: var(--ns-azul); }
+    .deps__autor span { font-size: 10px; color: var(--ns-dourado); letter-spacing: .1em; text-transform: uppercase; margin-top: 2px; display: block; }
+
+
+    /* ================================================================ FAQ ================================================================ */
+    .faq { background: var(--ns-creme); padding: var(--pad); }
+    .faq__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 44px; }
+    .faq__item { border: 1px solid rgba(0,0,0,.08); border-radius: 8px; overflow: hidden; transition: border-color .2s; }
+    .faq__item.aberto { border-color: var(--ns-dourado); }
+    .faq__p {
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+      padding: 18px 22px; cursor: pointer; background: var(--ns-branco);
+      transition: background .2s; font-size: 13.5px; font-weight: 500; color: var(--ns-azul); line-height: 1.4;
+    }
+    .faq__p:hover { background: var(--ns-creme); }
+    .faq__ico { font-size: 17px; flex-shrink: 0; color: var(--ns-dourado); transition: transform .3s; }
+    .faq__item.aberto .faq__ico { transform: rotate(45deg); }
+    .faq__r {
+      max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .3s;
+      background: var(--ns-creme); font-size: 13.5px; color: var(--ns-suave); line-height: 1.7; padding: 0 22px;
+    }
+    .faq__item.aberto .faq__r { max-height: 300px; padding: 18px 22px; }
+
+
+    /* ================================================================ RODAPÉ ================================================================ */
+    .rodape { background: #060f1e; border-top: 1px solid rgba(201,168,76,.1); }
+    .rodape__principal {
+      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 44px;
+      padding: 56px 80px 40px;
+    }
+    .rodape__marca p { font-family: var(--fonte-corpo); font-size: 15px; color: rgba(255,255,255,.3); line-height: 1.7; max-width: 280px; margin: 14px 0 18px; }
+    .rodape__logo { width: 100px; height: auto; border-radius: 6px; margin-bottom: 4px; }
+    .rodape__redes { display: flex; gap: 8px; }
+    .rodape__rede {
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 1px solid rgba(201,168,76,.18);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; color: rgba(201,168,76,.45); transition: all .2s;
+    }
+    .rodape__rede:hover { background: var(--ns-dourado); color: var(--ns-azul); border-color: var(--ns-dourado); }
+    .rodape__col h4 { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--ns-dourado); margin-bottom: 18px; font-weight: 500; }
+    .rodape__col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .rodape__col ul li a { color: rgba(255,255,255,.36); font-size: 12.5px; transition: color .2s; }
+    .rodape__col ul li a:hover { color: var(--ns-dourado); }
+    .rodape__col p { color: rgba(255,255,255,.32); font-size: 12.5px; line-height: 1.6; }
+    .rodape__col p + p { margin-top: 9px; }
+    .rodape__col p strong { color: rgba(255,255,255,.5); display: block; margin-bottom: 1px; }
+    .rodape__inferior {
+      border-top: 1px solid rgba(255,255,255,.05);
+      padding: 16px 80px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+    }
+    .rodape__inferior p { font-size: 11px; color: rgba(255,255,255,.17); }
+    .rodape__inferior a { color: rgba(201,168,76,.35); font-size: 11px; transition: color .2s; }
+    .rodape__inferior a:hover { color: var(--ns-dourado); }
+
+
+    /* ================================================================ WA FAB ================================================================ */
+    .wa-fab {
+      position: fixed; bottom: 26px; right: 26px; z-index: 999;
+      width: 60px; height: 60px; background: var(--ns-wa); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 27px; box-shadow: 0 8px 28px rgba(37,211,102,.4); transition: all .25s;
+    }
+    .wa-fab:hover { transform: scale(1.1); }
+    .wa-fab__anel { position: absolute; inset: -5px; border-radius: 50%; border: 2px solid rgba(37,211,102,.28); animation: pulsar 2s ease-out infinite; }
+    .wa-fab__dot { position: absolute; top: 2px; right: 2px; width: 15px; height: 15px; background: #ff4444; border-radius: 50%; border: 2px solid #060f1e; display: flex; align-items: center; justify-content: center; font-size: 7px; color: #fff; font-weight: 700; }
+    @keyframes pulsar { 0% { transform: scale(1); opacity: .6; } 100% { transform: scale(1.5); opacity: 0; } }
+
+
+    /* ================================================================ COOKIES ================================================================ */
+    .cookies {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 998;
+      background: rgba(6,15,30,.97); backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(201,168,76,.18);
+      padding: 18px 80px;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+      transform: translateY(0); transition: transform .4s;
+    }
+    .cookies--oculto { transform: translateY(110%); }
+    .cookies p { font-size: 12.5px; color: rgba(255,255,255,.52); max-width: 640px; line-height: 1.6; }
+    .cookies a { color: var(--ns-dourado); }
+    .cookies__btns { display: flex; gap: 10px; }
+    .cookies__aceitar { background: var(--ns-dourado); color: var(--ns-azul); border: none; padding: 9px 22px; border-radius: 4px; font-size: 12.5px; font-weight: 500; cursor: pointer; font-family: var(--fonte-ui); transition: background .2s; }
+    .cookies__aceitar:hover { background: var(--ns-dourado-clr); }
+    .cookies__recusar { background: transparent; color: rgba(255,255,255,.36); border: 1px solid rgba(255,255,255,.13); padding: 9px 22px; border-radius: 4px; font-size: 12.5px; cursor: pointer; font-family: var(--fonte-ui); transition: all .2s; }
+    .cookies__recusar:hover { border-color: rgba(255,255,255,.26); color: rgba(255,255,255,.54); }
+
+
+    /* ================================================================ RESPONSIVO ================================================================ */
+    @media (max-width: 1100px) {
+      :root { --pad: 80px 40px; }
+      .barra-retorno, .nav { padding-left: 40px; padding-right: 40px; }
+      .contato__inner { padding: 46px; gap: 44px; }
+      .rodape__principal { padding: 46px 40px 34px; }
+      .rodape__inferior { padding: 15px 40px; }
+      .cookies { padding: 15px 40px; }
+    }
+
+    @media (max-width: 860px) {
+      .barra-retorno { display: none; }
+      .nav { padding: 0 20px; }
+      .nav__links { display: none; }
+      .hamburger { display: flex; }
+      .hero { grid-template-columns: 1fr; }
+      .hero__right { display: none; }
+      .hero__left { padding: 48px 24px 56px; }
+      .sobre__grid, .contato__inner, .banner-parceiro__inner { grid-template-columns: 1fr; gap: 28px; }
+      .areas__grid { grid-template-columns: 1fr; }
+      .deps__grid { grid-template-columns: 1fr; }
+      .faq__grid { grid-template-columns: 1fr; }
+      .card-wa, .banner-parceiro__card { min-width: unset; }
+      .banner-parceiro { padding: 56px 24px; }
+      .banner-parceiro__inner { padding: 32px 24px; }
+      .rodape__principal { grid-template-columns: 1fr; gap: 24px; padding: 36px 24px 24px; }
+      .rodape__inferior { padding: 14px 24px; flex-direction: column; text-align: center; }
+      .cookies { padding: 14px 20px; }
+      .wa-fab { bottom: 18px; right: 18px; width: 54px; height: 54px; font-size: 24px; }
+    }
+
+  
+    /* ============================================================
+       MELHORIAS DE UX E DESIGN — NUNES SANTOS
+       ============================================================ */
+
+    html { scroll-padding-top: 80px; }
+
+    ::selection { background: var(--ns-dourado); color: var(--ns-azul); }
+
+    :focus-visible { outline: 2px solid var(--ns-dourado); outline-offset: 3px; }
+
+    img { user-select: none; -webkit-user-drag: none; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--ns-azul); }
+    ::-webkit-scrollbar-thumb { background: var(--ns-dourado); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--ns-dourado-clr); }
+
+    .entrar:nth-child(2) { transition-delay: .08s; }
+    .entrar:nth-child(3) { transition-delay: .16s; }
+    .entrar:nth-child(4) { transition-delay: .24s; }
+
+    .areas__card, .deps__card, .faq__item { will-change: transform; }
+
+    .hero__badge { position: relative; overflow: hidden; }
+    .hero__badge::after {
+      content: ""; position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+      background: linear-gradient(to right, transparent, rgba(201,168,76,.15), transparent);
+      animation: brilhoNS 3.5s ease infinite 2s;
+    }
+    @keyframes brilhoNS { 0%{left:-100%} 100%{left:200%} }
+
+    .areas__card:hover {
+      background: linear-gradient(135deg, var(--ns-branco) 0%, rgba(201,168,76,.03) 100%);
+    }
+
+    .faq__item { position: relative; }
+    .faq__p::before {
+      content: ""; width: 3px; height: 0; background: var(--ns-dourado);
+      position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+      transition: height .3s ease; border-radius: 0 2px 2px 0;
+    }
+    .faq__item.aberto .faq__p::before { height: 60%; }
+
+    .rodape::before {
+      content: ""; display: block; height: 3px;
+      background: linear-gradient(to right, transparent, var(--ns-dourado), transparent);
+    }
+
+    .wa-fab::before {
+      content: "Falar no WhatsApp"; position: absolute; right: 70px; top: 50%;
+      transform: translateY(-50%); background: rgba(6,15,30,.92);
+      color: var(--ns-branco); font-size: 11px; white-space: nowrap;
+      padding: 6px 12px; border-radius: 4px; opacity: 0;
+      pointer-events: none; transition: opacity .25s ease;
+    }
+    .wa-fab:hover::before { opacity: 1; }
+
+</style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LegalService",
+    "name": "Nunes Santos Advocacia",
+    "description": "Advocacia especializada em Direito Previdenciário, Trabalhista, Família, Servidor Público e Cível em Vitória, ES.",
+    "url": "https://nunessantosadvocacia.com.br",
+    "telephone": "+5527996643510",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "R. Gen. Câmara, 109",
+      "addressLocality": "Vitória",
+      "addressRegion": "ES",
+      "postalCode": "29052-260",
+      "addressCountry": "BR"
+    },
+    "sameAs": [
+      "https://www.instagram.com/nunessantos.advocacia/"
+    ],
+    "areaServed": {
+      "@type": "State",
+      "name": "Espírito Santo"
+    },
+    "knowsAbout": [
+      "Direito Previdenciário",
+      "Direito Trabalhista",
+      "Direito de Família",
+      "Servidor Público",
+      "Inventário",
+      "Direito Civil",
+      "Direito do Consumidor"
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+  <!-- BARRA DE RETORNO para Amarildo Santos -->
+  <div class="barra-retorno">
+    <div class="barra-retorno__texto">
+      Escritório parceiro: <span>Amarildo Santos Advogados</span> — Servidor Público e Professor
+    </div>
+    <a href="amarildo-santos-advogados.html" class="barra-retorno__btn">
+      ← Voltar ao Amarildo Santos
+    </a>
+  </div>
+
+
+  <!-- NAVEGAÇÃO -->
+  <nav class="nav" id="nav">
+    <div class="nav__logo">
+      <img src="data:image/png;base64,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" alt="Nunes Santos Advocacia" loading="lazy" style="height:44px;width:auto;border-radius:4px;">
+      <div class="nav__logo-texto">
+        Nunes Santos
+        <small class="nav__logo-sub">Advocacia · Vitória, ES</small>
+      </div>
+    </div>
+    <ul class="nav__links">
+      <li><a href="#inicio">Início</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#areas">Especialidades</a></li>
+      <li><a href="#contato">Contato</a></li>
+      <li><a href="amarildo-santos-advogados.html" style="color:var(--ns-dourado);">◂ Amarildo Santos</a></li>
+    </ul>
+    <a href="https://wa.me/5527996643510?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20uma%20consulta." class="nav__wa" target="_blank" rel="noopener">
+      💬 Falar no WhatsApp
+    </a>
+    <div class="hamburger" id="hamburger" onclick="alternarMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- MENU MOBILE -->
+  <div class="mob-menu" id="mob-menu">
+    <a href="#inicio"  onclick="fecharMenu()">Início</a>
+    <a href="#sobre"   onclick="fecharMenu()">Sobre o Escritório</a>
+    <a href="#areas"   onclick="fecharMenu()">Especialidades</a>
+    <a href="#contato" onclick="fecharMenu()">Contato</a>
+    <a href="amarildo-santos-advogados.html" class="mob-menu__voltar">◂ Amarildo Santos</a>
+    <a href="https://wa.me/5527996643510" class="mob-menu__wa" target="_blank" rel="noopener">💬 WhatsApp — (27) 99664-3510</a>
+  </div>
+
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero__left">
+      <div class="hero__badge">Advocacia especializada · Vitória, ES</div>
+      <img src="data:image/png;base64,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" alt="Nunes Santos Advocacia" class="hero__logo-grande">
+      <h1>Seu direito merece<br><em>defesa especializada</em></h1>
+      <p class="hero__desc">
+        Nunes Santos Advocacia — especialistas em Direito Previdenciário (INSS e RPPS), Servidor Público, Trabalhista, Família, Cível e Inventário. Atendimento humanizado e resultado efetivo em Vitória/ES.
+      </p>
+      <div class="hero__btns">
+        <a href="https://wa.me/5527996643510?text=Olá!%20Gostaria%20de%20uma%20consulta." class="hero__btn-wa" target="_blank" rel="noopener">
+          <span class="ico">💬</span>
+          <span class="txt">
+            <small>Atendimento direto pelo WhatsApp</small>
+            <strong>(27) 99664-3510</strong>
+          </span>
+        </a>
+        <div class="hero__alt">
+          <span>ou siga:</span>
+          <a href="https://www.instagram.com/nunessantos.advocacia/" target="_blank" rel="noopener">📸 @nunessantos.advocacia</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero__right">
+      <div class="hero__visual">
+        <div class="hero__servicos-lista">
+          <div class="hero__serv"><div class="hero__serv-dot"></div><span>Previdenciário INSS e RPPS (Servidor)</span></div>
+          <div class="hero__serv"><div class="hero__serv-dot"></div><span>Direito do Servidor Público</span></div>
+          <div class="hero__serv"><div class="hero__serv-dot"></div><span>Direito Trabalhista</span></div>
+          <div class="hero__serv"><div class="hero__serv-dot"></div><span>Direito de Família</span></div>
+          <div class="hero__serv"><div class="hero__serv-dot"></div><span>Inventário e Herança</span></div>
+          <div class="hero__serv"><div class="hero__serv-dot"></div><span>Direito Civil e Danos Morais</span></div>
+          <div class="hero__serv"><div class="hero__serv-dot"></div><span>Direito do Consumidor</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SOBRE -->
+  <section class="sobre" id="sobre">
+    <div class="sobre__grid">
+      <div class="sobre__visual entrar">
+        <div class="sobre__card-escuro">
+          <p class="sobre__citacao">Cada caso é único. Nossa missão é oferecer a solução jurídica mais eficaz, com atendimento próximo e transparente.</p>
+          <div class="sobre__sig">
+            <strong>Nunes Santos Advocacia</strong>
+            <span>OAB/ES · Vitória, Espírito Santo</span>
+          </div>
+        </div>
+        <div class="sobre__card-dourado">
+          <div class="sobre__stat"><strong>5+</strong><span>Anos de atuação</span></div>
+          <div class="sobre__stat"><strong>ES</strong><span>Atuação no Espírito Santo</span></div>
+          <div class="sobre__stat"><strong>100%</strong><span>Comprometimento com o cliente</span></div>
+          <div class="sobre__stat"><strong>6</strong><span>Áreas de especialidade</span></div>
+        </div>
+      </div>
+      <div class="entrar">
+        <div class="rotulo">Quem Somos</div>
+        <h2 class="titulo">Advocacia completa para todas as fases da vida</h2>
+        <p class="sobre__texto" style="font-family:var(--fonte-corpo);font-size:18px;line-height:1.75;color:var(--ns-suave);margin-bottom:16px;">O escritório Nunes Santos Advocacia oferece assessoria jurídica completa nas principais áreas do Direito. Atendemos pessoas físicas com foco em resultados concretos e comunicação transparente.</p>
+        <p class="sobre__texto" style="font-family:var(--fonte-corpo);font-size:18px;line-height:1.75;color:var(--ns-suave);margin-bottom:16px;">Operando dentro do mesmo complexo que o escritório Amarildo Santos Advogados, compartilhamos valores de excelência, ética e comprometimento com nossos clientes.</p>
+        <div class="sobre__pilares">
+          <div class="sobre__pilar"><span class="sobre__pilar-ico">⚖️</span><div><strong>Ética e Transparência</strong><span>Comunicação clara em todas as etapas do processo, sem surpresas.</span></div></div>
+          <div class="sobre__pilar"><span class="sobre__pilar-ico">🎯</span><div><strong>Foco em Resultados</strong><span>Estratégia jurídica personalizada para maximizar suas chances de êxito.</span></div></div>
+          <div class="sobre__pilar"><span class="sobre__pilar-ico">🤝</span><div><strong>Atendimento Humanizado</strong><span>Cada cliente é único. Ouvimos, entendemos e defendemos seus direitos.</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ÁREAS -->
+  <section class="areas" id="areas">
+    <div class="areas__header">
+      <div class="rotulo">Especialidades</div>
+      <h2 class="titulo">Áreas de Atuação</h2>
+      <p class="intro">Assessoria jurídica completa nas principais áreas que impactam a vida das pessoas. Fale conosco para descobrir como podemos ajudar no seu caso.</p>
+    </div>
+    <div class="areas__grid">
+
+      <div class="areas__card entrar" data-n="01">
+        <div class="areas__ico">🏦</div>
+        <h3>Direito Previdenciário</h3>
+        <p>Atuamos tanto no INSS (Regime Geral) quanto no RPPS (Regime Próprio de servidores públicos). Aposentadoria, revisão de benefícios, pensão por morte, BPC/LOAS e planejamento previdenciário.</p>
+        <a href="https://wa.me/5527996643510?text=Olá!%20Tenho%20uma%20dúvida%20sobre%20Direito%20Previdenciário." class="areas__wa" target="_blank" rel="noopener">💬 Consultar agora</a>
+      </div>
+
+      <div class="areas__card entrar" data-n="02" style="border-color:rgba(201,168,76,.25);">
+        <div class="areas__ico">🏛️</div>
+        <h3>Servidor Público</h3>
+        <p>Aposentadoria do servidor, revisão de proventos, acumulação de benefícios, pensão por morte de servidor, análise de regime próprio (RPPS estadual e municipal).</p>
+        <a href="https://wa.me/5527996643510?text=Olá!%20Tenho%20uma%20dúvida%20sobre%20Servidor%20Público%20e%20Previdenciário." class="areas__wa" target="_blank" rel="noopener">💬 Consultar agora</a>
+      </div>
+
+      <div class="areas__card entrar" data-n="03">
+        <div class="areas__ico">💼</div>
+        <h3>Direito Trabalhista</h3>
+        <p>Reclamações trabalhistas, rescisão indireta, horas extras, adicional de insalubridade, assédio moral, FGTS, aviso prévio e demais verbas rescisórias.</p>
+        <a href="https://wa.me/5527996643510?text=Olá!%20Tenho%20uma%20dúvida%20sobre%20Direito%20Trabalhista." class="areas__wa" target="_blank" rel="noopener">💬 Consultar agora</a>
+      </div>
+
+      <div class="areas__card entrar" data-n="04">
+        <div class="areas__ico">👨‍👩‍👧</div>
+        <h3>Direito de Família</h3>
+        <p>Divórcio consensual e litigioso, guarda e visitação de filhos, pensão alimentícia, reconhecimento de paternidade e dissolução de união estável.</p>
+        <a href="https://wa.me/5527996643510?text=Olá!%20Tenho%20uma%20dúvida%20sobre%20Direito%20de%20Família." class="areas__wa" target="_blank" rel="noopener">💬 Consultar agora</a>
+      </div>
+
+      <div class="areas__card entrar" data-n="05">
+        <div class="areas__ico">📜</div>
+        <h3>Inventário e Herança</h3>
+        <p>Inventário extrajudicial e judicial, partilha de bens, testamento, doação com reserva de usufruto e regularização de imóveis herdados.</p>
+        <a href="https://wa.me/5527996643510?text=Olá!%20Tenho%20uma%20dúvida%20sobre%20Inventário." class="areas__wa" target="_blank" rel="noopener">💬 Consultar agora</a>
+      </div>
+
+      <div class="areas__card entrar" data-n="06">
+        <div class="areas__ico">⚖️</div>
+        <h3>Direito Civil e Danos Morais</h3>
+        <p>Ações indenizatórias, cobranças, contratos, responsabilidade civil, revisão contratual, negativação indevida e ações contra instituições financeiras.</p>
+        <a href="https://wa.me/5527996643510?text=Olá!%20Tenho%20uma%20dúvida%20sobre%20Direito%20Civil." class="areas__wa" target="_blank" rel="noopener">💬 Consultar agora</a>
+      </div>
+
+      <div class="areas__card entrar" data-n="07">
+        <div class="areas__ico">🛒</div>
+        <h3>Direito do Consumidor</h3>
+        <p>Problemas com produtos e serviços, cobranças indevidas, cancelamentos, propaganda enganosa, contratos bancários abusivos e defesa em superendividamento.</p>
+        <a href="https://wa.me/5527996643510?text=Olá!%20Tenho%20uma%20dúvida%20sobre%20Direito%20do%20Consumidor." class="areas__wa" target="_blank" rel="noopener">💬 Consultar agora</a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- CONTATO / WHATSAPP -->
+  <section class="contato" id="contato">
+    <div class="contato__inner">
+      <div class="contato__info">
+        <div class="rotulo">Fale Conosco</div>
+        <h2 class="titulo titulo--claro">Consulta rápida<br>e sem burocracia</h2>
+        <p class="contato__desc">Mande uma mensagem diretamente pelo WhatsApp. Nossa equipe responde com agilidade nos dias úteis. Consulta inicial gratuita.</p>
+        <div class="contato__lista">
+          <div class="contato__item">
+            <div class="contato__item-ico">💬</div>
+            <div>
+              <span class="contato__item-rot">WhatsApp</span>
+              <a href="https://wa.me/5527996643510" target="_blank" rel="noopener">(27) 99664-3510</a>
+            </div>
+          </div>
+          <div class="contato__item">
+            <div class="contato__item-ico">📸</div>
+            <div>
+              <span class="contato__item-rot">Instagram</span>
+              <a href="https://www.instagram.com/nunessantos.advocacia/" target="_blank" rel="noopener">@nunessantos.advocacia</a>
+            </div>
+          </div>
+          <div class="contato__item">
+            <div class="contato__item-ico">📍</div>
+            <div>
+              <span class="contato__item-rot">Localização</span>
+              <a href="https://maps.app.goo.gl/zu1gnVex2w2Fccfz5" target="_blank" rel="noopener"><br>R. Gen. Câmara, 109 — Praia do Suá, Vitória - ES, CEP 29052-260</a>
+            </div>
+          </div>
+          <div class="contato__item">
+            <div class="contato__item-ico">🕐</div>
+            <div>
+              <span class="contato__item-rot">Horário</span>
+              <p>Segunda a sexta — 8h às 18h</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-wa entrar">
+        <div class="card-wa__badge">Atendimento Direto</div>
+        <span class="card-wa__ico">💬</span>
+        <span class="card-wa__rot">WhatsApp Nunes Santos</span>
+        <span class="card-wa__num">(27) 99664-3510</span>
+        <span class="card-wa__hora">⏰ Seg–Sex · 8h às 18h · Resposta rápida</span>
+        <a href="https://wa.me/5527996643510?text=Olá!%20Gostaria%20de%20agendar%20uma%20consulta%20com%20o%20escritório%20Nunes%20Santos." class="card-wa__btn" target="_blank" rel="noopener">
+          Iniciar Conversa
+        </a>
+        <span class="card-wa__nota">Consulta inicial gratuita e sem compromisso</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- BANNER PARCEIRO — Amarildo Santos -->
+  <section class="banner-parceiro" id="parceiro">
+    <div class="banner-parceiro__inner">
+      <div>
+        <span class="banner-parceiro__tag">Escritório Parceiro — mesmo complexo</span>
+        <h2>Precisa de assessoria em<br>Servidor Público ou Professor?</h2>
+        <p>Para questões de carreira funcional, progressão, PAD, mandado de segurança, impugnação em concurso e defesa de direitos do magistério (piso, abono, aposentadoria especial), conheça o escritório parceiro Amarildo Santos Advogados — especialistas exclusivos em servidor e professor.</p>
+      </div>
+      <div class="banner-parceiro__card">
+        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#c8a96e,#8a6a3a);display:flex;align-items:center;justify-content:center;font-family:var(--fonte-titulo);font-size:16px;font-weight:700;color:#0d1b2a;margin:0 auto 14px;">AS</div>
+        <span class="banner-parceiro__nome">Amarildo Santos</span>
+        <span class="banner-parceiro__sub">Servidor Público & Professor</span>
+        <a href="amarildo-santos-advogados.html" class="banner-parceiro__btn">← Conhecer o escritório</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- DEPOIMENTOS -->
+  <section class="deps" id="depoimentos">
+    <div class="rotulo">Depoimentos</div>
+    <h2 class="titulo">O que nossos clientes dizem</h2>
+    <div class="deps__grid">
+      <div class="deps__card entrar">
+        <div class="deps__stars">★★★★★</div>
+        <p>Resolveram meu processo de aposentadoria pelo INSS em tempo recorde. Equipe atenciosa, comunicativa e muito competente. Recomendo sem hesitar.</p>
+        <div class="deps__autor"><strong>Roberto M.</strong><span>Aposentadoria INSS · Serra, ES</span></div>
+      </div>
+      <div class="deps__card entrar">
+        <div class="deps__stars">★★★★★</div>
+        <p>Fui muito bem atendido no meu processo trabalhista. Conseguiram todas as verbas que eu tinha direito e ainda um dano moral. Excelente escritório!</p>
+        <div class="deps__autor"><strong>Fernanda S.</strong><span>Direito Trabalhista · Vitória, ES</span></div>
+      </div>
+      <div class="deps__card entrar">
+        <div class="deps__stars">★★★★★</div>
+        <p>Inventário resolvido de forma rápida e sem stress. Explicaram tudo com clareza, me deixaram tranquila durante todo o processo. Profissionais exemplares.</p>
+        <div class="deps__autor"><strong>Ana C.</strong><span>Inventário · Vila Velha, ES</span></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+  <div class="rotulo">Dúvidas Frequentes</div>
+  <h2 class="titulo">Perguntas Frequentes</h2>
+
+  <div class="faq__grid">
+
+    <div class="faq__item" onclick="alternarFaq(this)">
+      <div class="faq__p">Como funciona a consulta inicial? <span class="faq__ico">+</span></div>
+      <div class="faq__r"><em style="color:var(--ns-dourado);font-size:12px;font-style:italic;opacity:.7;">⏳ Em breve — aguardando informação do escritório.</em></div>
+    </div>
+
+    <div class="faq__item" onclick="alternarFaq(this)">
+      <div class="faq__p">Vocês atendem online ou só presencialmente? <span class="faq__ico">+</span></div>
+      <div class="faq__r"><em style="color:var(--ns-dourado);font-size:12px;font-style:italic;opacity:.7;">⏳ Em breve — aguardando informação do escritório.</em></div>
+    </div>
+
+    <div class="faq__item" onclick="alternarFaq(this)">
+      <div class="faq__p">O escritório atende INSS e previdenciário de servidor público (RPPS)? <span class="faq__ico">+</span></div>
+      <div class="faq__r"><em style="color:var(--ns-dourado);font-size:12px;font-style:italic;opacity:.7;">⏳ Em breve — aguardando informação do escritório.</em></div>
+    </div>
+
+    <div class="faq__item" onclick="alternarFaq(this)">
+      <div class="faq__p">Quanto tempo leva um processo trabalhista? <span class="faq__ico">+</span></div>
+      <div class="faq__r"><em style="color:var(--ns-dourado);font-size:12px;font-style:italic;opacity:.7;">⏳ Em breve — aguardando informação do escritório.</em></div>
+    </div>
+
+    <div class="faq__item" onclick="alternarFaq(this)">
+      <div class="faq__p">Como funciona o inventário? Precisa ir ao cartório? <span class="faq__ico">+</span></div>
+      <div class="faq__r"><em style="color:var(--ns-dourado);font-size:12px;font-style:italic;opacity:.7;">⏳ Em breve — aguardando informação do escritório.</em></div>
+    </div>
+
+    <div class="faq__item" onclick="alternarFaq(this)">
+      <div class="faq__p">Atendem divórcio com filhos menores? <span class="faq__ico">+</span></div>
+      <div class="faq__r"><em style="color:var(--ns-dourado);font-size:12px;font-style:italic;opacity:.7;">⏳ Em breve — aguardando informação do escritório.</em></div>
+    </div>
+
+    <div class="faq__item" onclick="alternarFaq(this)">
+      <div class="faq__p">Atendem casos fora do Espírito Santo? <span class="faq__ico">+</span></div>
+      <div class="faq__r"><em style="color:var(--ns-dourado);font-size:12px;font-style:italic;opacity:.7;">⏳ Em breve — aguardando informação do escritório.</em></div>
+    </div>
+
+    <div class="faq__item" onclick="alternarFaq(this)">
+      <div class="faq__p">A consulta inicial é gratuita? <span class="faq__ico">+</span></div>
+      <div class="faq__r"><em style="color:var(--ns-dourado);font-size:12px;font-style:italic;opacity:.7;">⏳ Em breve — aguardando informação do escritório.</em></div>
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- RODAPÉ -->
+  <footer class="rodape">
+    <div class="rodape__principal">
+      <div class="rodape__marca">
+        <img src="data:image/png;base64,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" alt="Nunes Santos Advocacia" class="rodape__logo">
+        <p>Advocacia especializada em Previdenciário, Trabalhista, Família, Cível e Inventário. Comprometidos com o seu direito.</p>
+        <div class="rodape__redes">
+          <a href="https://wa.me/5527996643510" class="rodape__rede" target="_blank" rel="noopener" title="WhatsApp">💬</a>
+          <a href="https://www.instagram.com/nunessantos.advocacia/" class="rodape__rede" target="_blank" rel="noopener" title="Instagram">📸</a>
+        </div>
+      </div>
+      <div class="rodape__col">
+        <h4>Especialidades</h4>
+        <ul>
+          <li><a href="#areas">Previdenciário INSS e RPPS</a></li>
+          <li><a href="#areas">Servidor Público</a></li>
+          <li><a href="#areas">Trabalhista</a></li>
+          <li><a href="#areas">Família e Divórcio</a></li>
+          <li><a href="#areas">Inventário</a></li>
+          <li><a href="#areas">Civil e Danos Morais</a></li>
+          <li><a href="#areas">Direito do Consumidor</a></li>
+        </ul>
+      </div>
+      <div class="rodape__col">
+        <h4>Contato</h4>
+        <p><strong>WhatsApp</strong><a href="https://wa.me/5527996643510" target="_blank" rel="noopener">(27) 99664-3510</a></p>
+        <p><strong>Instagram</strong><a href="https://www.instagram.com/nunessantos.advocacia/" target="_blank" rel="noopener">@nunessantos.advocacia</a></p>
+        <p><strong>Endereço</strong><br>R. Gen. Câmara, 109 — Praia do Suá, Vitória - ES, CEP 29052-260<br>Praia do Suá — Vitória/ES</p>
+        <p><strong>Horário</strong>Seg–Sex · 8h às 18h</p>
+      </div>
+    </div>
+    <div class="rodape__inferior">
+      <p>© 2024 Nunes Santos Advocacia · OAB/ES · Todos os direitos reservados.</p>
+      <a href="amarildo-santos-advogados.html">◂ Amarildo Santos Advogados</a>
+    </div>
+  </footer>
+
+
+  <!-- BOTÃO FLUTUANTE WHATSAPP -->
+  <a href="https://wa.me/5527996643510?text=Olá!%20Gostaria%20de%20uma%20consulta." class="wa-fab" target="_blank" rel="noopener" title="WhatsApp Nunes Santos">
+    💬
+    <div class="wa-fab__anel"></div>
+    <div class="wa-fab__dot">1</div>
+  </a>
+
+
+  <!-- BANNER DE COOKIES -->
+  <div class="cookies" id="cookies">
+    <p>Utilizamos cookies para melhorar sua experiência neste site.</p>
+    <div class="cookies__btns">
+      <button class="cookies__recusar" onclick="fecharCookies()">Recusar</button>
+      <button class="cookies__aceitar" onclick="aceitarCookies()">Aceitar</button>
+    </div>
+  </div>
+
+
+  <script>
+    function alternarMenu() {
+      document.getElementById('hamburger').classList.toggle('aberto');
+      document.getElementById('mob-menu').classList.toggle('aberto');
+    }
+    function fecharMenu() {
+      document.getElementById('hamburger').classList.remove('aberto');
+      document.getElementById('mob-menu').classList.remove('aberto');
+    }
+    window.addEventListener('scroll', function() {
+      document.getElementById('nav').classList.toggle('nav--sombra', scrollY > 20);
+      const secoes = document.querySelectorAll('section[id]');
+      const links  = document.querySelectorAll('.nav__links a');
+      let atual = '';
+      secoes.forEach(s => { if (scrollY >= s.offsetTop - 110) atual = s.id; });
+      links.forEach(a => {
+        a.classList.remove('ativo');
+        if (a.getAttribute('href') === '#' + atual) a.classList.add('ativo');
+      });
+    });
+    const obs = new IntersectionObserver(e => {
+      e.forEach(en => { if (en.isIntersecting) { en.target.classList.add('vis'); obs.unobserve(en.target); } });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.entrar').forEach(el => obs.observe(el));
+    function alternarFaq(item) {
+      const era = item.classList.contains('aberto');
+      document.querySelectorAll('.faq__item.aberto').forEach(i => i.classList.remove('aberto'));
+      if (!era) item.classList.add('aberto');
+    }
+    function aceitarCookies() { localStorage.setItem('ns-cookies','1'); document.getElementById('cookies').classList.add('cookies--oculto'); }
+    function fecharCookies() { document.getElementById('cookies').classList.add('cookies--oculto'); }
+    window.addEventListener('DOMContentLoaded', () => {
+      if (localStorage.getItem('ns-cookies')) document.getElementById('cookies').classList.add('cookies--oculto');
+    });
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior:'smooth' }); }
+      });
+    });
+  </script>
+
+</body>
+</html>
