@@ -1635,12 +1635,153 @@ img {
   .lawyers-grid { grid-template-columns: 1fr; }
 }
 
+/* ═══════════════════════════════════════════════════
+   BARRA DE PROGRESSO DE LEITURA
+   ═══════════════════════════════════════════════════ */
+#progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(to right, var(--ouro-400), var(--ouro-200), var(--ouro-300));
+  transform-origin: left center;
+  transform: scaleX(0);
+  z-index: 9999;
+  pointer-events: none;
+  box-shadow: 0 0 10px rgba(200,169,110,.55);
+  transition: transform .05s linear;
+}
+
+/* ═══════════════════════════════════════════════════
+   BOTÃO VOLTAR AO TOPO
+   ═══════════════════════════════════════════════════ */
+#back-to-top {
+  position: fixed;
+  bottom: 110px; right: 28px;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--azul-800);
+  border: 1px solid rgba(200,169,110,.35);
+  color: var(--ouro-400);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0;
+  transform: translateY(16px) scale(.85);
+  transition: opacity .3s ease, transform .3s ease,
+              background var(--trans), color var(--trans), box-shadow var(--trans);
+  z-index: 150;
+  box-shadow: 0 4px 18px rgba(13,27,42,.25);
+  font-family: var(--font-sans);
+  line-height: 1;
+}
+#back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+#back-to-top:hover {
+  background: var(--ouro-400);
+  color: var(--azul-800);
+  border-color: var(--ouro-400);
+  transform: translateY(-3px) scale(1);
+  box-shadow: 0 8px 28px rgba(200,169,110,.4);
+}
+@media (max-width: 860px) {
+  #back-to-top { bottom: 90px; right: 16px; width: 40px; height: 40px; }
+}
+
+/* ═══════════════════════════════════════════════════
+   HERO — GRADIENTE NO TEXTO DOURADO
+   ═══════════════════════════════════════════════════ */
+.hero h1 em {
+  background: linear-gradient(120deg, var(--ouro-400) 0%, var(--ouro-200) 45%, var(--ouro-400) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shine-text 5s linear infinite;
+}
+@keyframes shine-text {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ═══════════════════════════════════════════════════
+   STATS BAR — EFEITO BRILHO
+   ═══════════════════════════════════════════════════ */
+.stats-bar { position: relative; overflow: hidden; }
+.stats-bar::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,.18) 50%, transparent 70%);
+  transform: translateX(-100%);
+  animation: stats-sweep 5s ease-in-out infinite 3s;
+  pointer-events: none;
+}
+@keyframes stats-sweep {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+/* ═══════════════════════════════════════════════════
+   WA FAB — GLOW MELHORADO
+   ═══════════════════════════════════════════════════ */
+.wa-fab {
+  box-shadow: 0 4px 20px rgba(37,211,102,.35), 0 0 0 0 rgba(37,211,102,.5) !important;
+  animation: wa-pulse-glow 2.5s ease-out infinite !important;
+}
+@keyframes wa-pulse-glow {
+  0%   { box-shadow: 0 4px 20px rgba(37,211,102,.35), 0 0 0 0 rgba(37,211,102,.5); }
+  70%  { box-shadow: 0 4px 20px rgba(37,211,102,.35), 0 0 0 16px rgba(37,211,102,0); }
+  100% { box-shadow: 0 4px 20px rgba(37,211,102,.35), 0 0 0 0 rgba(37,211,102,0); }
+}
+
+/* ═══════════════════════════════════════════════════
+   REVEAL — VARIAÇÕES DIRECIONAIS
+   ═══════════════════════════════════════════════════ */
+.reveal-left {
+  opacity: 0; transform: translateX(-30px);
+  transition: opacity .7s cubic-bezier(.4,0,.2,1), transform .7s cubic-bezier(.4,0,.2,1);
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+.reveal-right {
+  opacity: 0; transform: translateX(30px);
+  transition: opacity .7s cubic-bezier(.4,0,.2,1), transform .7s cubic-bezier(.4,0,.2,1);
+}
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+.reveal-scale {
+  opacity: 0; transform: scale(.92);
+  transition: opacity .6s cubic-bezier(.4,0,.2,1), transform .6s cubic-bezier(.4,0,.2,1);
+}
+.reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+/* Atrasos em cadeia para grupos */
+.reveal-stagger > *:nth-child(1) { transition-delay: 0s !important; }
+.reveal-stagger > *:nth-child(2) { transition-delay: .1s !important; }
+.reveal-stagger > *:nth-child(3) { transition-delay: .2s !important; }
+.reveal-stagger > *:nth-child(4) { transition-delay: .3s !important; }
+.reveal-stagger > *:nth-child(5) { transition-delay: .4s !important; }
+
+/* ═══════════════════════════════════════════════════
+   SEÇÕES — SEPARADOR DOURADO
+   ═══════════════════════════════════════════════════ */
+.sobre::before, .areas::before, .equipe::before, .deps::before, .blog::before {
+  content: '';
+  display: block;
+  width: 48px; height: 2px;
+  background: var(--ouro-400);
+  margin: 0 auto var(--sp-16);
+  border-radius: 2px;
+}
+
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"LegalService","name":"Amarildo Santos Advogados","url":"https://amarildosantosadvogados.com.br","telephone":"+552730974867","email":"contato@amarildosantosadvogados.com.br","foundingDate":"2015","address":{"@type":"PostalAddress","streetAddress":"R. Gen. Câmara, 109","addressLocality":"Vitória","addressRegion":"ES","postalCode":"29052-260","addressCountry":"BR"}}
 </script>
 </head>
 <body>
+<div id="progress-bar" role="progressbar" aria-label="Progresso de leitura" aria-hidden="true"></div>
 <div class="partner-bar">
   <span class="partner-bar__text">Dentro do mesmo complexo: <strong>Nunes Santos Advocacia</strong> — Previdenciário · Trabalhista · Família · Cível</span>
   <a href="nunes-santos.html" class="partner-bar__cta"><img src="data:image/png;base64,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" alt="Nunes Santos" class="partner-bar__logo" width="20" height="20"> Conhecer o escritório →</a>
@@ -1710,9 +1851,9 @@ img {
   </div>
 </section>
 <div class="stats-bar">
-  <div class="stats-bar__item"><span class="stats-bar__number">2015</span><span class="stats-bar__label">Fundação do escritório</span></div>
-  <div class="stats-bar__item"><span class="stats-bar__number">500+</span><span class="stats-bar__label">Clientes atendidos</span></div>
-  <div class="stats-bar__item"><span class="stats-bar__number">100%</span><span class="stats-bar__label">Foco em servidor e professor</span></div>
+  <div class="stats-bar__item"><span class="stats-bar__number" data-count="2015" data-suffix="">2015</span><span class="stats-bar__label">Fundação do escritório</span></div>
+  <div class="stats-bar__item"><span class="stats-bar__number" data-count="500" data-suffix="+">500+</span><span class="stats-bar__label">Clientes atendidos</span></div>
+  <div class="stats-bar__item"><span class="stats-bar__number" data-count="100" data-suffix="%">100%</span><span class="stats-bar__label">Foco em servidor e professor</span></div>
   <div class="stats-bar__item"><span class="stats-bar__number">PGE</span><span class="stats-bar__label">Ex-servidor PGE/ES</span></div>
   <div class="stats-bar__item"><span class="stats-bar__number">FDV</span><span class="stats-bar__label">Bacharel em Direito</span></div>
 </div>
@@ -2011,6 +2152,8 @@ img {
   </div>
 </footer>
 
+<button id="back-to-top" aria-label="Voltar ao topo">&#8679;</button>
+
 <a href="https://wa.me/5527999106604?text=Olá!%20Gostaria%20de%20uma%20consulta." class="wa-fab" target="_blank" rel="noopener" id="wa-fab" aria-label="WhatsApp">
   💬<div class="wa-fab__ring" aria-hidden="true"></div><div class="wa-fab__dot" aria-hidden="true">1</div>
 </a>
@@ -2239,6 +2382,77 @@ img {
   const waFooter = document.getElementById("wa-footer");
   waFooter && waFooter.addEventListener("click", function () {
     trackEvent("WhatsApp", "click_footer", "footer_button");
+  });
+
+  /* ═══════════════════════════════════════════════
+     BARRA DE PROGRESSO DE LEITURA
+  ═══════════════════════════════════════════════ */
+  const progressBar = document.getElementById("progress-bar");
+  if (progressBar) {
+    window.addEventListener("scroll", function () {
+      const scrollTop  = window.scrollY;
+      const docHeight  = document.documentElement.scrollHeight - window.innerHeight;
+      const progress   = docHeight > 0 ? scrollTop / docHeight : 0;
+      progressBar.style.transform = "scaleX(" + progress + ")";
+    }, { passive: true });
+  }
+
+  /* ═══════════════════════════════════════════════
+     BOTÃO VOLTAR AO TOPO
+  ═══════════════════════════════════════════════ */
+  const backToTop = document.getElementById("back-to-top");
+  if (backToTop) {
+    window.addEventListener("scroll", function () {
+      backToTop.classList.toggle("visible", window.scrollY > 400);
+    }, { passive: true });
+    backToTop.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  /* ═══════════════════════════════════════════════
+     ANIMAÇÃO COUNTER — STATS BAR
+  ═══════════════════════════════════════════════ */
+  function animateCounter(el, from, to, duration, suffix) {
+    var start = null;
+    function step(ts) {
+      if (!start) start = ts;
+      var progress = Math.min((ts - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      el.textContent = Math.round(from + (to - from) * eased) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  var statsObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        var numbers = entry.target.querySelectorAll(".stats-bar__number[data-count]");
+        numbers.forEach(function (el) {
+          var target = parseInt(el.getAttribute("data-count"), 10);
+          var suffix = el.getAttribute("data-suffix") || "";
+          animateCounter(el, 0, target, 1400, suffix);
+        });
+        statsObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  var statsBar = document.querySelector(".stats-bar");
+  if (statsBar) statsObserver.observe(statsBar);
+
+  /* Observar animações direcionais */
+  var extraRevealObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        extraRevealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.07, rootMargin: "0px 0px -40px 0px" });
+  document.querySelectorAll(".reveal-left, .reveal-right, .reveal-scale").forEach(function (el) {
+    extraRevealObs.observe(el);
   });
 
   /* ═══════════════════════════════════════════════

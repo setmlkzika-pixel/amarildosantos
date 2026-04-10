@@ -575,6 +575,77 @@
     }
     .wa-fab:hover::before { opacity: 1; }
 
+    /* ================================================================
+       BARRA DE PROGRESSO DE LEITURA
+       ================================================================ */
+    #ns-progress-bar {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(to right, var(--ns-dourado), var(--ns-dourado-clr), var(--ns-dourado));
+      transform-origin: left center; transform: scaleX(0);
+      z-index: 9999; pointer-events: none;
+      box-shadow: 0 0 10px rgba(201,168,76,.5);
+      transition: transform .05s linear;
+    }
+
+    /* ================================================================
+       BOTÃO VOLTAR AO TOPO
+       ================================================================ */
+    #ns-back-to-top {
+      position: fixed; bottom: 100px; right: 26px;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--ns-azul); border: 1px solid rgba(201,168,76,.35);
+      color: var(--ns-dourado); font-size: 1.1rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      opacity: 0; transform: translateY(16px) scale(.85);
+      transition: opacity .3s ease, transform .3s ease, background .25s, color .25s, box-shadow .25s;
+      z-index: 150; box-shadow: 0 4px 18px rgba(13,27,53,.25);
+      font-family: var(--fonte-ui); line-height: 1;
+    }
+    #ns-back-to-top.visivel { opacity: 1; transform: translateY(0) scale(1); }
+    #ns-back-to-top:hover {
+      background: var(--ns-dourado); color: var(--ns-azul);
+      border-color: var(--ns-dourado);
+      transform: translateY(-3px) scale(1);
+      box-shadow: 0 8px 28px rgba(201,168,76,.4);
+    }
+
+    /* ================================================================
+       HERO TÍTULO — GRADIENTE DOURADO
+       ================================================================ */
+    .hero-ns h1 em, .titulo em {
+      background: linear-gradient(120deg, var(--ns-dourado) 0%, var(--ns-dourado-clr) 45%, var(--ns-dourado) 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: ns-shine 5s linear infinite;
+    }
+    @keyframes ns-shine { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+
+    /* ================================================================
+       WA FAB — GLOW MELHORADO
+       ================================================================ */
+    .wa-fab {
+      box-shadow: 0 8px 28px rgba(37,211,102,.4), 0 0 0 0 rgba(37,211,102,.5) !important;
+      animation: ns-wa-glow 2.5s ease-out infinite !important;
+    }
+    @keyframes ns-wa-glow {
+      0%   { box-shadow: 0 8px 28px rgba(37,211,102,.4), 0 0 0 0 rgba(37,211,102,.5); }
+      70%  { box-shadow: 0 8px 28px rgba(37,211,102,.4), 0 0 0 16px rgba(37,211,102,0); }
+      100% { box-shadow: 0 8px 28px rgba(37,211,102,.4), 0 0 0 0 rgba(37,211,102,0); }
+    }
+
+    /* ================================================================
+       SEPARADOR DOURADO NAS SEÇÕES
+       ================================================================ */
+    .sobre-ns::before, .areas-ns::before, .depoimentos::before {
+      content: '';
+      display: block; width: 48px; height: 2px;
+      background: var(--ns-dourado);
+      margin: 0 auto 48px;
+      border-radius: 2px;
+    }
+
 </style>
 
   <script type="application/ld+json">
@@ -614,6 +685,7 @@
 </head>
 
 <body>
+  <div id="ns-progress-bar" role="progressbar" aria-label="Progresso de leitura" aria-hidden="true"></div>
 
   <!-- BARRA DE RETORNO para Amarildo Santos -->
   <div class="barra-retorno">
@@ -979,6 +1051,8 @@
   </footer>
 
 
+  <button id="ns-back-to-top" aria-label="Voltar ao topo">&#8679;</button>
+
   <!-- BOTÃO FLUTUANTE WHATSAPP -->
   <a href="https://wa.me/5527996643510?text=Olá!%20Gostaria%20de%20uma%20consulta." class="wa-fab" target="_blank" rel="noopener" title="WhatsApp Nunes Santos">
     💬
@@ -1037,6 +1111,50 @@
         if (t) { e.preventDefault(); t.scrollIntoView({ behavior:'smooth' }); }
       });
     });
+
+    /* ── BARRA DE PROGRESSO DE LEITURA ── */
+    const nsProgressBar = document.getElementById('ns-progress-bar');
+    if (nsProgressBar) {
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docH = document.documentElement.scrollHeight - window.innerHeight;
+        nsProgressBar.style.transform = 'scaleX(' + (docH > 0 ? scrollTop / docH : 0) + ')';
+      }, { passive: true });
+    }
+
+    /* ── BOTÃO VOLTAR AO TOPO ── */
+    const nsBackTop = document.getElementById('ns-back-to-top');
+    if (nsBackTop) {
+      window.addEventListener('scroll', () => {
+        nsBackTop.classList.toggle('visivel', window.scrollY > 400);
+      }, { passive: true });
+      nsBackTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    }
+
+    /* ── ANIMAÇÃO COUNTER ── */
+    function nsAnimCounter(el, from, to, dur, suffix) {
+      let start = null;
+      function step(ts) {
+        if (!start) start = ts;
+        const p = Math.min((ts - start) / dur, 1);
+        const e = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(from + (to - from) * e) + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    const nsStatsObs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('[data-count]').forEach(el => {
+            nsAnimCounter(el, 0, parseInt(el.dataset.count, 10), 1400, el.dataset.suffix || '');
+          });
+          nsStatsObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.stats-ns, .sobre__stats').forEach(el => nsStatsObs.observe(el));
+
   </script>
 
 </body>
